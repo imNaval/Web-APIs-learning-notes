@@ -19,5 +19,17 @@ async function loadHeader() {
     }
 }
 
-// Load header when the DOM is ready
-document.addEventListener('DOMContentLoaded', loadHeader); 
+document.addEventListener('DOMContentLoaded', async function() {
+  // Load the header
+  await loadHeader();
+
+  // Dynamically set the Home link after header is loaded
+  var homeLink = document.querySelector('.home-link');
+  if (homeLink) {
+    if (window.location.hostname === "imnaval.github.io") {
+      homeLink.setAttribute('href', '/Web-APIs-learning-notes/index.html');
+    } else {
+      homeLink.setAttribute('href', 'index.html');
+    }
+  }
+}); 
