@@ -50,6 +50,25 @@ body {
   .sidebar a.has-subtopics.active::before {
     content: '▼ ';
   }
+
+#header {
+  position: relative;
+  cursor: pointer;
+}
+
+#header:hover::after {
+  content: "Home";
+  position: absolute;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  top: 10%;
+  left: 60%;
+  z-index: 10;
+  white-space: nowrap;
+}
   
   .subtopics {
     padding-left: 15px;

@@ -36,6 +36,7 @@ let noteFiles = [
         if (note.subtopics.length === 0 && fetchedSubtopics.length > 0) {
           note.subtopics = fetchedSubtopics;
         }
+        console.log(`fetched subtopics for ${note.name}: `, fetchedSubtopics);
         console.log(`Subtopics for ${note.name}:`, note.subtopics); // Debug log
       } catch (err) {
         console.error(`Error loading ${note.file}:`, err);
@@ -73,6 +74,7 @@ let noteFiles = [
         a.addEventListener('click', (e) => {
           e.preventDefault();
           toggleSubtopics(topicId);
+          console.log("clicked");
         });
       }
       topicList.appendChild(li);
@@ -107,6 +109,21 @@ let noteFiles = [
   // Initialize sidebar
   populateSidebar();
 
+
+
+
+    // Add click event listener for the header
+    const header = document.getElementById("header");
+    if (header) {
+      header.addEventListener("click", async () => {
+        try {
+          window.location.href = "/";
+        } catch (err) {
+          console.error('Error loading index.html:', err);
+          mainContent.innerHTML = '<p>Error loading homepage. Check console.</p>';
+        }
+      });
+    }
 
   
 //   // Populate sidebar with topics and subtopics
