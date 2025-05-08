@@ -9,17 +9,23 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="sidebar">
-    <h2 id="header">Notes Topics</h2>
-    <ul id="topic-list"></ul>
-  </div>
-  <div class="main-content">
-    <h1 id="topic-title">Loading...</h1>
-    <div id="topic-content"></div>
+  <!-- Header will be loaded here by header.js -->
+
+  <div class="content">
+    <div class="sidebar">
+      <h2 id="home">Notes Topics</h2>
+      <ul id="topic-list"></ul>
+    </div>
+    <div class="main-content">
+      <!-- <h1 id="topic-title">Loading...</h1> -->
+      <div id="topic-content">Loading...</div>
+    </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="header.js"></script>
+  <script src="language.js"></script>
   <script src="script.js"></script>
   <script>
     // Load topic content
@@ -27,10 +33,12 @@
     const topic = params.get('topic');
     if (topic) {
       const note = noteFiles.find(n => n.file.includes(topic));
-      fetch(`notes/${topic}.md`)
+      const currentLang = getCurrentLanguage();
+      const langFolder = currentLang === 'english' ? 'notes' : 'hinglish';
+      fetch(`${langFolder}/${topic}.md`)
         .then(res => res.text())
         .then(content => {
-          document.getElementById('topic-title').textContent = note ? note.name : topic;
+          // document.getElementById('topic-title').textContent = note ? note.name : topic;
           document.getElementById('topic-content').innerHTML = marked.parse(content);
           // Add copy buttons
           document.querySelectorAll('pre').forEach(pre => {
