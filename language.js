@@ -13,11 +13,18 @@ function setLanguage(lang) {
     const params = new URLSearchParams(window.location.search);
     params.set('lang', lang);
     
-    // Preserve the topic parameter if it exists
+    // Preserve the topic or interview parameter if it exists
     const topic = params.get('topic');
-    const newUrl = topic 
-        ? `notes.html?topic=${topic}&lang=${lang}`
-        : `index.html?lang=${lang}`;
+    const interview = params.get('interview');
+    
+    let newUrl;
+    if (topic) {
+        newUrl = `notes.html?topic=${topic}&lang=${lang}`;
+    } else if (interview) {
+        newUrl = `notes.html?interview=${interview}&lang=${lang}`;
+    } else {
+        newUrl = `index.html?lang=${lang}`;
+    }
     
     console.log('Navigating to:', newUrl);
     window.location.href = newUrl;

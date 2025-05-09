@@ -102,8 +102,18 @@ body {
   }
 
   .sidebar h2 {
-    font-size: 1.5em;
-    color: #ecf0f1;
+    color: #fff;
+    margin: 1.5em 0 0.5em;
+    padding: 0 1em;
+    font-size: 1.2em;
+  }
+  
+  /* Style for interview section header */
+  .sidebar h2#interview {
+    margin-top: 2em;
+    color: #6ec8ff;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1em;
   }
   
   .sidebar ul {
