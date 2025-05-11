@@ -149,6 +149,14 @@ body {
     content: '▼ ';
   }
 
+   /* Add style for active topic link - make selector more specific */
+   .sidebar ul li a.active,
+   .sidebar #topic-list a.active,
+   .sidebar #interview-list a.active {
+     color: #ff8c00 !important; /* Orange color for active topic with !important to ensure it's applied */
+     font-weight: bold;
+   }
+
 #home {
   position: relative;
   cursor: pointer;

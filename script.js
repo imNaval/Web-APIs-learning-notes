@@ -52,6 +52,37 @@ function getCurrentLanguage() {
     return urlParams.get('lang') || 'english';
 }
 
+// Function to show coming soon message
+function showComingSoonMessage(container) {
+  container.innerHTML = `
+    <div style="
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(100vh - 200px);
+      width: 100%;
+    ">
+      <div style="
+        text-align: center;
+        padding: 40px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin: 20px;
+        max-width: 600px;
+        width: 90%;
+      ">
+        <h2 style="color: #2c3e50; margin-bottom: 20px;">🚀 Coming Soon!</h2>
+        <p style="color: #666; font-size: 1.1em; margin-bottom: 15px;">We're working hard to bring you amazing content.</p>
+        <p style="color: #888;">This section is under development. Check back soon!</p>
+        <div style="margin-top: 30px;">
+          <span style="display: inline-block; padding: 8px 16px; background: #3498db; color: white; border-radius: 5px; font-size: 0.9em;">Stay tuned!</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 // Populate sidebar with topics and subtopics
 async function populateSidebar() {
     const topicList = document.getElementById('topic-list');
@@ -79,6 +110,9 @@ async function populateSidebar() {
         try {
             console.log(`Fetching file: ${note.file}`);
             const res = await fetch(note.file);
+            if (!res.ok) {
+                throw new Error('File not found');
+            }
             const content = await res.text();
             const fetchedSubtopics = [];
             const lines = content.split('\n');
@@ -94,6 +128,7 @@ async function populateSidebar() {
             }
         } catch (err) {
             console.error(`Error loading ${note.file}:`, err);
+            // Remove the coming soon message from here
         }
     }));
 

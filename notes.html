@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Notes - Web APIs Hub 🚀</title>
+  <title>JavaScript Web APIs Notes – LearnJavaScript.in</title>
+  <meta name="description" content="Browse detailed notes and interview questions on JavaScript Web APIs. Perfect for frontend interview preparation.">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
   <link rel="stylesheet" href="styles.css">
@@ -47,9 +48,13 @@
       const currentLang = getCurrentLanguage();
       const langFolder = currentLang === 'english' ? 'english' : 'hinglish';
       fetch(`notes/${langFolder}/${topic}.md`)
-        .then(res => res.text())
+        .then(res => {
+          if (!res.ok) {
+            throw new Error('File not found');
+          }
+          return res.text();
+        })
         .then(content => {
-          // document.getElementById('topic-title').textContent = note ? note.name : topic;
           document.getElementById('topic-content').innerHTML = marked.parse(content);
           // Add copy buttons
           document.querySelectorAll('pre').forEach(pre => {
@@ -72,7 +77,10 @@
           }
         })
         .catch(() => {
-          document.getElementById('topic-content').innerHTML = '<p>Error loading notes.</p>';
+          const topicContent = document.getElementById('topic-content');
+          if (topicContent) {
+            showComingSoonMessage(topicContent);
+          }
         });
     } else if (interview) {
       // Load interview question content
@@ -80,7 +88,12 @@
       const currentLang = getCurrentLanguage();
       const langFolder = currentLang === 'english' ? 'english' : 'hinglish';
       fetch(`interviewQuestions/${langFolder}/${interview}.md`)
-        .then(res => res.text())
+        .then(res => {
+          if (!res.ok) {
+            throw new Error('File not found');
+          }
+          return res.text();
+        })
         .then(content => {
           document.getElementById('topic-content').innerHTML = marked.parse(content);
           // Add copy buttons
@@ -105,7 +118,10 @@
         })
         .catch(err => {
           console.error('Error loading interview content:', err);
-          document.getElementById('topic-content').innerHTML = '<p>Error loading interview questions.</p>';
+          const topicContent = document.getElementById('topic-content');
+          if (topicContent) {
+            showComingSoonMessage(topicContent);
+          }
         });
     }
   </script>
