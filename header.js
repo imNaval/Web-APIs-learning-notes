@@ -32,4 +32,39 @@ document.addEventListener('DOMContentLoaded', async function() {
       homeLink.setAttribute('href', 'index.html');
     }
   }
+
+  // Sidebar toggle for mobile
+  const sidebarToggle = document.getElementById('sidebar-toggle');
+  const sidebar = document.querySelector('.sidebar');
+  if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      sidebar.classList.toggle('open');
+    });
+    // Hide sidebar when clicking outside
+    document.addEventListener('click', function(e) {
+      if (window.innerWidth <= 768 && sidebar.classList.contains('open')) {
+        if (!sidebar.contains(e.target) && e.target !== sidebarToggle) {
+          sidebar.classList.remove('open');
+        }
+      }
+    });
+  }
+
+  const langBtn = document.getElementById('toggle-lang-btn');
+  function updateLangBtnText() {
+    if (window.innerWidth <= 768) {
+      langBtn.textContent = langBtn.dataset.lang === 'english' ? 'Hinglish' : 'English';
+    } else {
+      langBtn.textContent = langBtn.dataset.lang === 'english' ? 'Switch to Hinglish' : 'Switch to English';
+    }
+  }
+  if (langBtn) {
+    updateLangBtnText();
+    window.addEventListener('resize', updateLangBtnText);
+    langBtn.addEventListener('click', function() {
+      // Toggle language as before, then update text
+      updateLangBtnText();
+    });
+  }
 }); 

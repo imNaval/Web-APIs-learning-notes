@@ -30,24 +30,22 @@
 </head>
 <body>
   <!-- Header will be loaded here by header.js -->
-
   <div class="content">
-    <div class="sidebar">
+    <nav class="sidebar" aria-label="Notes Topics Navigation">
       <h2 id="home">Notes Topics</h2>
       <ul id="topic-list"></ul>
-      
       <h2 id="interview">Interview Questions</h2>
       <ul id="interview-list"></ul>
-    </div>
-    <div class="main-content">
-      <h1>Welcome to Web APIs Notes Hub 🚀</h1>
-      <p>Bhai, yeh tera ultimate study hub hai! Select a topic from the sidebar to dive into detailed notes on Web APIs. Each topic is packed with examples, use cases, and interview tips to help you ace frontend interviews. 😎</p>
-      <p>Add new notes by placing Markdown files in the <code>/notes</code> folder. The sidebar will automatically update!</p>
-
-      <div class="home-note-container"></div>
-    </div>
+    </nav>
+    <main class="main-content">
+      <section class="home-section">
+        <h1>Welcome to the JavaScript and Web-APIs Notes Hub 🚀</h1>
+        <p>This is your ultimate study destination for mastering JavaScript and Web APIs. Select a topic from the sidebar to access comprehensive notes, practical examples, real-world use cases, and expert interview tips. Everything you need to excel in frontend interviews is right here!</p>
+        <p>JavaScript is the core language of the web, enabling dynamic, interactive experiences in every modern browser. Web APIs are powerful browser features—like DOM manipulation, Fetch, Web Storage, and more—that let you build rich, responsive, and user-friendly web applications. Mastering these is essential for any frontend developer.</p>
+        <div class="home-note-container"></div>
+      </section>
+    </main>
   </div>
-
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="header.js"></script>

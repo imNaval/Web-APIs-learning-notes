@@ -4,45 +4,68 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JavaScript Web APIs Notes – LearnJavaScript.in</title>
+  <meta name="title" content="JavaScript Web APIs Notes – LearnJavaScript.in">
   <meta name="description" content="Browse detailed notes and interview questions on JavaScript Web APIs. Perfect for frontend interview preparation.">
+  <meta name="keywords" content="JavaScript, Web APIs, Frontend Interview, JS Notes, Learn JavaScript">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css">
   <link rel="stylesheet" href="styles.css">
+  <link rel="canonical" href="https://www.learnjavascript.in/notes.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.learnjavascript.in/notes.html">
+  <meta property="og:title" content="JavaScript Web APIs Notes – LearnJavaScript.in">
+  <meta property="og:description" content="Browse detailed notes and interview questions on JavaScript Web APIs. Perfect for frontend interview preparation.">
+  <meta property="og:image" content="https://www.learnjavascript.in/assets/og-image.png">
+  <meta property="og:site_name" content="Learn JavaScript & Web APIs">
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://www.learnjavascript.in/notes.html">
+  <meta property="twitter:title" content="JavaScript Web APIs Notes – LearnJavaScript.in">
+  <meta property="twitter:description" content="Browse detailed notes and interview questions on JavaScript Web APIs. Perfect for frontend interview preparation.">
+  <meta property="twitter:image" content="https://www.learnjavascript.in/assets/og-image.png">
+  <meta name="twitter:site" content="@YourTwitterHandle">
+  <meta name="twitter:creator" content="@YourTwitterHandle">
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+  <meta name="robots" content="index, follow">
+  <link rel="apple-touch-icon" href="/assets/favicon.png">
 </head>
 <body>
   <!-- Header will be loaded here by header.js -->
-
   <div class="content">
-    <div class="sidebar">
+    <nav class="sidebar" aria-label="Notes Topics Navigation">
       <h2 id="home">Notes Topics</h2>
       <ul id="topic-list"></ul>
-
-      <h2 id="interview">interview Questions</h2>
+      <h2 id="interview">Interview Questions</h2>
       <ul id="interview-list"></ul>
-    </div>
-    <div class="main-content">
-      <!-- <h1 id="topic-title">Loading...</h1> -->
-      <div id="topic-content">
-        <h1>Welcome to Web APIs Notes Hub 🚀</h1>
-        <p>Bhai, yeh tera ultimate study hub hai! Select a topic from the sidebar to dive into detailed notes on Web APIs. Each topic is packed with examples, use cases, and interview tips to help you ace frontend interviews. 😎</p>
-        <p>Add new notes by placing Markdown files in the <code>/notes</code> folder. The sidebar will automatically update!</p>
-  
+    </nav>
+    <main class="main-content">
+      <section id="topic-content">
         <div class="home-note-container"></div>
-      </div>
-    </div>
+      </section>
+    </main>
   </div>
-
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="header.js"></script>
   <script src="language.js"></script>
   <script src="script.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Learn JavaScript & Web APIs",
+    "url": "https://www.learnjavascript.in/notes.html",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://www.learnjavascript.in/notes.html?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
   <script>
     // Load topic content
     const params = new URLSearchParams(window.location.search);
     const topic = params.get('topic');
     const interview = params.get('interview');
-    
     if (topic) {
       const note = noteFiles.find(n => n.file.includes(topic));
       const currentLang = getCurrentLanguage();

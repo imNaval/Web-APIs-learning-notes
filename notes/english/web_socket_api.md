@@ -8,7 +8,7 @@ The WebSocket API is a modern web technology that enables **real-time, two-way c
   - WebSocket maintains a single connection for continuous data exchange without repeated requests.
   - Supports **full-duplex** communication, meaning the client and server can send data simultaneously.
 
-![Image Placeholder: WebSocket Overview](./images/socket.png)
+![Image Placeholder: WebSocket Overview](notes/images/socket.png)
 *Caption: Diagram showing the WebSocket connection between client and server.*
 
 ### How WebSocket Works?
@@ -94,8 +94,8 @@ socket.onmessage = (event) => {
 };
 ```
 
-![Image Placeholder: WebSocket Persistent Connection](notes/images/webSocket-PersistentConnection.jpg)
-*Caption: Example of WebSocket client code structure.*
+![Image Placeholder: WebSocket Persistent Connection](notes/images/WebSocketvsHTTP.png)
+*Caption: Example of WebSocket Persistent Connection vs HTTP .*
 
 
 ### Server-Side WebSocket
@@ -125,8 +125,8 @@ server.on('connection', (ws) => {
 });
 ```
 
-![Image Placeholder: WebSocket Server Setup](./images/socket.png)
-*Caption: Diagram of a WebSocket server handling client connections.*
+![Image Placeholder: WebSocket Server Setup](notes/images/WebSocketCommunication.png)
+*Caption: Diagram of a WebSocket client-server two way communication.*
 
 ### Use Cases
 - **Live Chat Apps**: Real-time messaging, like WhatsApp or Slack.
