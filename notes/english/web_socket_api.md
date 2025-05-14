@@ -128,6 +128,60 @@ server.on('connection', (ws) => {
 ![Image Placeholder: WebSocket Server Setup](notes/images/WebSocketCommunication.png)
 *Caption: Diagram of a WebSocket client-server two way communication.*
 
+
+
+## Closing Connections (Server-Side)
+
+Closing connections from the server is crucial for scenarios like maintenance, invalid data, or inactive clients.
+
+### Methods
+1. **Graceful Close (`close` Method)**:
+   - Sends a close frame with a code and reason.
+   - Example:
+     ```javascript
+     ws.close(4000, 'Invalid message received');
+     ```
+
+2. **Forceful Close (`terminate` Method)**:
+   - Immediately terminates the connection without a close frame.
+   - Example:
+     ```javascript
+     ws.terminate();
+     ```
+
+3. **Closing All Connections**:
+   - Closes all active connections, e.g., during server shutdown.
+   - Example:
+     ```javascript
+     server.clients.forEach((ws) => {
+       ws.close(1001, 'Server shutting down');
+     });
+     ```
+
+### Timeout-Based Close
+Closes connections for inactive clients after a set period.
+```javascript
+let timeout = setTimeout(() => {
+  ws.close(4001, 'Inactive for 30 seconds');
+}, 30000);
+
+ws.on('message', () => {
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    ws.close(4001, 'Inactive for 30 seconds');
+  }, 30000);
+});
+```
+
+### Common Close Codes
+- 1000: Normal closure
+- 1001: Going away (e.g., server shutdown)
+- 4000-4999: Custom codes
+
+**Visualization Idea**: A flowchart showing the close process: client inactivity → timeout → `close(4001)` → client `onclose` event. Use red for timeout and grey for close.
+
+
+
 ### Use Cases
 - **Live Chat Apps**: Real-time messaging, like WhatsApp or Slack.
 - **Stock Market Tickers**: Live price updates for stocks or cryptocurrencies.

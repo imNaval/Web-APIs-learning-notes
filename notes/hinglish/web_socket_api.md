@@ -127,6 +127,60 @@ server.on('connection', (ws) => {
 ![Image Placeholder: WebSocket Server Setup](./images/socket.png)
 *Caption: WebSocket server kaise clients ko handle karta hai.*
 
+
+
+## Server-Side se Connection Close Karna
+
+Server se connection band karna zaroori hota hai, jaise maintenance ke time, galat data aaye, ya client inactive ho.
+
+### Tareeke
+1. **Graceful Close (`close` Method)**:
+   - Close frame bhejta hai with code aur reason.
+   - Example:
+     ```javascript
+     ws.close(4000, 'Invalid message received');
+     ```
+
+2. **Forceful Close (`terminate` Method)**:
+   - Turant connection band, bina close frame ke.
+   - Example:
+     ```javascript
+     ws.terminate();
+     ```
+
+3. **Sab Connections Band Karna**:
+   - Server shutdown ke liye sab clients ko close karo.
+   - Example:
+     ```javascript
+     server.clients.forEach((ws) => {
+       ws.close(1001, 'Server band ho raha hai');
+     });
+     ```
+
+### Timeout wala Close
+Agar client 30 seconds tak inactive hai, toh band kar do.
+```javascript
+let timeout = setTimeout(() => {
+  ws.close(4001, '30 seconds se inactive hai');
+}, 30000);
+
+ws.on('message', () => {
+  clearTimeout(timeout);
+  timeout = setTimeout(() => {
+    ws.close(4001, '30 seconds se inactive hai');
+  }, 30000);
+});
+```
+
+### Common Close Codes
+- 1000: Normal band hona
+- 1001: Server ja raha hai
+- 4000-4999: Custom codes
+
+**Visualization Idea**: Ek flowchart jisme client inactivity → timeout → `close(4001)` → client `onclose` event dikhe. Red color timeout ke liye, grey close ke liye.
+
+
+
 ### Use Cases
 - **Live Chat Apps**: Real-time messaging (jaise WhatsApp, Slack).
 - **Stock Market Tickers**: Live price updates (stocks ya crypto ke liye).
