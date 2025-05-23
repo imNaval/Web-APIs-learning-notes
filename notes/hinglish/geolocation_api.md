@@ -1,7 +1,7 @@
-# Geolocation API Notes (Hinglish)
+# Geolocation API Notes
 
 ## Geolocation API Kya Hai?
-Arre bhai, Geolocation API ek browser-based API hai jo user ke device ka geographical location (latitude, longitude, etc.) access karne deta hai. Ye GPS, Wi-Fi, cellular networks, ya IP address ke through location data deta hai. Iska use apps mein hota hai jaise:
+Geolocation API ek browser-based API hai jo user ke device ka geographical location (latitude, longitude, etc.) access karne deta hai. Ye GPS, Wi-Fi, cellular networks, ya IP address ke through location data deta hai. Iska use apps mein hota hai jaise:
 - Maps aur navigation (Google Maps, Uber).
 - Location-based services (nearby restaurants dikhana).
 - Weather apps (local weather dikhana).

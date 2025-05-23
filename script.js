@@ -3,7 +3,7 @@ let noteFiles = [
     { name: 'Fetch API', file: 'notes/fetch_api.md', subtopics: [] },
     { name: 'Web Storage API', file: 'notes/web_storage_api.md', subtopics: ['LocalStorage', 'SessionStorage', 'Cookies'] },
     { name: 'Geolocation API', file: 'notes/geolocation_api.md', subtopics: [] },
-    { name: 'Canvas API', file: 'notes/canvas_api.md', subtopics: [] },
+    { name: 'Canvas API & SVG', file: 'notes/canvas_api.md', subtopics: [] },
     { name: 'Web Socket API', file: 'notes/web_socket_api.md', subtopics: [] },
     { name: 'Intersection Observer API', file: 'notes/intersection_observer_api.md', subtopics: [] },
     { name: 'Notification & Clipboard API', file: 'notes/notification_clipboard_api.md', subtopics: [] },
