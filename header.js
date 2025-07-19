@@ -3,6 +3,19 @@ async function loadHeader() {
         const response = await fetch('header.html');
         const headerHtml = await response.text();
         document.body.insertAdjacentHTML('afterbegin', headerHtml);
+        
+        // Initialize theme after header is loaded
+        if (typeof initTheme === 'function') {
+            initTheme();
+        } else {
+            // If not loaded yet, try again shortly
+            setTimeout(() => {
+                if (typeof initTheme === 'function') {
+                    initTheme();
+                }
+            }, 100);
+        }
+        
         // Wait for language.js to be loaded, then call initLanguageToggle
         if (typeof initLanguageToggle === 'function') {
             initLanguageToggle();

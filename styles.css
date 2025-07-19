@@ -1,30 +1,89 @@
+/* CSS Variables for theming */
+:root {
+  /* Light theme colors */
+  --bg-primary: #f9f9f9;
+  --bg-secondary: #ffffff;
+  --bg-sidebar: #2c3e50;
+  --bg-header: #2980b9;
+  --text-primary: #333;
+  --text-secondary: #666;
+  --text-sidebar: #ffffff;
+  --text-sidebar-link: #3498db;
+  --text-sidebar-link-hover: #2980b9;
+  --text-sidebar-active: #ff8c00;
+  --border-color: #ddd;
+  --code-bg: #d6d5d5;
+  --code-inline-bg: #ebe4e4;
+  --pre-bg: #d6d5d5;
+  --table-header-bg: #f4f4f4;
+  --scrollbar-bg: #e0e0e0;
+  --scrollbar-thumb: #b0b0b0;
+  --scrollbar-thumb-hover: #888;
+  --shadow-color: rgba(0,0,0,0.15);
+  --image-bg: #434343;
+  --button-bg: #3498db;
+  --button-hover: #2980b9;
+  --toggle-btn-bg: #007bff;
+  --toggle-btn-hover: #0056b3;
+}
+
+/* Dark theme colors */
+[data-theme="dark"] {
+  --bg-primary: #0a1929;
+  --bg-secondary: #132f4c;
+  --bg-sidebar: #1e3a5f;
+  --bg-header: #0d2538;
+  --text-primary: #ffffff;
+  --text-secondary: #b0bec5;
+  --text-sidebar: #ffffff;
+  --text-sidebar-link: #64b5f6;
+  --text-sidebar-link-hover: #42a5f5;
+  --text-sidebar-active: #ffb74d;
+  --border-color: #2c3e50;
+  --code-bg: #1e3a5f;
+  --code-inline-bg: #2c3e50;
+  --pre-bg: #1a2332;
+  --table-header-bg: #2c3e50;
+  --scrollbar-bg: #1e3a5f;
+  --scrollbar-thumb: #4a5568;
+  --scrollbar-thumb-hover: #718096;
+  --shadow-color: rgba(0,0,0,0.3);
+  --image-bg: #2c3e50;
+  --button-bg: #1976d2;
+  --button-hover: #1565c0;
+  --toggle-btn-bg: #1976d2;
+  --toggle-btn-hover: #1565c0;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     margin: 0;
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     overflow-x: hidden;
     width: 100%;
     scrollbar-width: thin;
-    scrollbar-color: #b0b0b0 #e0e0e0;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .content{
     position: relative;
-    background-color: #f9f9f9;
-    color: #333;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     display: flex;
     flex: 1;
     width: 100%;
     box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   .header{
-    background-color: #3498db;
+    background-color: var(--bg-header);
     color: white;
     padding: 4px 40px;
     
@@ -38,6 +97,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 8px var(--shadow-color);
   }
 
   .header-right {
@@ -55,10 +116,27 @@ body {
     color: #007bff;
   }
   
+  /* Theme toggle button styles */
+  #theme-toggle-btn {
+    padding: 8px 15px;
+    background-color: var(--toggle-btn-bg);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+    margin-left: 10px;
+  }
+  
+  #theme-toggle-btn:hover {
+    background-color: var(--toggle-btn-hover);
+  }
+
   /* Toggle button styles (adjusted for header) */
   #toggle-lang-btn {
     padding: 8px 15px;
-    background-color: #007bff;
+    background-color: var(--toggle-btn-bg);
     color: white;
     border: none;
     border-radius: 5px;
@@ -68,7 +146,7 @@ body {
   }
   
   #toggle-lang-btn:hover {
-    background-color: #0056b3;
+    background-color: var(--toggle-btn-hover);
   }
 
 
@@ -76,8 +154,8 @@ body {
   .sidebar {
     margin-top: 60px;
     width: 250px;
-    background-color: #2c3e50;
-    color: white;
+    background-color: var(--bg-sidebar);
+    color: var(--text-sidebar);
     padding: 20px;
     padding-bottom: 80px;
     height: 80vh;
@@ -86,6 +164,8 @@ body {
     white-space: nowrap;
     position: fixed;
     scrollbar-width: none; /* Hide scrollbar for Firefox */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 2px 0 8px var(--shadow-color);
   }
   
   /* Hide horizontal scrollbar for sidebar (Webkit browsers) */
@@ -103,7 +183,7 @@ body {
   }
 
   .sidebar h2 {
-    color: #fff;
+    color: var(--text-sidebar);
     margin: 1.5em 0 0.5em;
     padding: 0 1em;
     font-size: 1.2em;
@@ -127,7 +207,7 @@ body {
   }
   
   .sidebar a {
-    color: #3498db;
+    color: var(--text-sidebar-link);
     text-decoration: none;
     display: inline-block;
     padding: 5px 0;
@@ -138,7 +218,7 @@ body {
   }
   
   .sidebar a:hover {
-    color: #2980b9;
+    color: var(--text-sidebar-link-hover);
   }
   
   .sidebar a.has-subtopics::before {
@@ -154,7 +234,7 @@ body {
    .sidebar ul li a.active,
    .sidebar #topic-list a.active,
    .sidebar #interview-list a.active {
-     color: #ff8c00 !important; /* Orange color for active topic with !important to ensure it's applied */
+     color: var(--text-sidebar-active) !important; /* Orange color for active topic with !important to ensure it's applied */
      font-weight: bold;
    }
 
@@ -198,21 +278,24 @@ body {
   }
   
   h1 {
-    color: #2c3e50;
+    color: var(--text-primary);
     font-size: 2.5em;
     font-weight: 700;
-    border-bottom: 2px solid #3498db;
+    border-bottom: 2px solid var(--button-bg);
+    transition: color 0.3s ease, border-bottom-color 0.3s ease;
   }
   
   h2 {
-    color: #34495e;
+    color: var(--text-primary);
     font-size: 1.8em;
     margin-top: 20px;
+    transition: color 0.3s ease;
   }
   
   h3 {
-    color: #34495e;
+    color: var(--text-primary);
     font-size: 1.5em;
+    transition: color 0.3s ease;
   }
   
   p {
@@ -233,23 +316,26 @@ body {
   }
   
   pre {
-    background-color: #d6d5d5;
+    background-color: var(--pre-bg);
     padding: 15px;
     border-radius: 5px;
     overflow-x: auto;
     position: relative;
+    border: 1px solid var(--border-color);
   }
   
   code {
     font-family: 'Courier New', Courier, monospace;
-    background-color: #ebe4e4;
+    background-color: var(--code-inline-bg);
     padding: 2px 4px;
     border-radius: 3px;
+    color: var(--text-primary);
   }
   
   pre code {
     background: none;
     padding: 0;
+    color: var(--text-primary);
   }
   
   table {
@@ -259,13 +345,13 @@ body {
   }
   
   th, td {
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     padding: 8px;
     text-align: left;
   }
   
   th {
-    background-color: #f4f4f4;
+    background-color: var(--table-header-bg);
     font-weight: 700;
   }
   
@@ -274,15 +360,18 @@ body {
     top: 10px;
     right: 10px;
     padding: 5px 10px;
-    background-color: #3498db;
+    background-color: var(--button-bg);
     color: white;
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s ease;
+    z-index: 10;
   }
   
   button.copy-btn:hover {
-    background-color: #2980b9;
+    background-color: var(--button-hover);
   }
   
   @media (max-width: 768px) {
@@ -354,12 +443,11 @@ body {
       overflow-x: hidden !important;
     }
     #toggle-lang-btn {
-      /* background: linear-gradient(90deg, #ff9800 60%, #ffc107 100%); */
-      background: linear-gradient(90deg, #f9b753 60%, #4f9bff 100%);
-      color: #222;
+      background: var(--toggle-btn-bg);
+      color: white;
       font-weight: bold;
       border: none;
-      box-shadow: 0 2px 8px rgba(255,152,0,0.15);
+      box-shadow: 0 2px 8px var(--shadow-color);
       padding: 10px 0;
       font-size: 15px;
       border-radius: 8px;
@@ -374,8 +462,8 @@ body {
       padding: 4px 8px;
     }
     #toggle-lang-btn:hover {
-      background: linear-gradient(90deg, #ffa726 60%, #ffd54f 100%);
-      color: #111;
+      background: var(--toggle-btn-hover);
+      color: white;
     }
     .header-right {
       flex-direction: column;
@@ -416,42 +504,42 @@ body {
 body::-webkit-scrollbar {
   width: 8px;
   height: 16px;
-  background: #e0e0e0;
+  background: var(--scrollbar-bg);
   border-radius: 8px;
 }
 body::-webkit-scrollbar-thumb {
-  background: #b0b0b0;
+  background: var(--scrollbar-thumb);
   border-radius: 8px;
 }
 body::-webkit-scrollbar-thumb:hover {
-  background: #888;
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* For Firefox */
 body {
   scrollbar-width: thin;
-  scrollbar-color: #b0b0b0 #e0e0e0;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
 }
 
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   width: 16px;      /* vertical scrollbar thickness */
   height: 16px;     /* horizontal scrollbar thickness */
-  background: #e0e0e0;
+  background: var(--scrollbar-bg);
   border-radius: 8px;
 }
 html::-webkit-scrollbar-thumb {
-  background: #b0b0b0;
+  background: var(--scrollbar-thumb);
   border-radius: 8px;
 }
 html::-webkit-scrollbar-thumb:hover {
-  background: #888;
+  background: var(--scrollbar-thumb-hover);
 }
 
 /* For Firefox */
 html {
   scrollbar-width: thin;
-  scrollbar-color: #b0b0b0 #e0e0e0;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg);
 }
 
 /* Style all images inside the main content area */
@@ -465,7 +553,7 @@ html {
   margin: 24px auto;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 1.5px 6px rgba(255,200,80,0.15);
-  background: #434343;
+  background: var(--image-bg);
   padding: 4px;
   transition: box-shadow 0.3s;
 }
@@ -474,21 +562,22 @@ html {
   box-shadow: 0 8px 32px rgba(0,0,0,0.25), 0 2px 8px rgba(255,200,80,0.25);
 }
 
-.main-content img + em,
-.main-content img + p > em {
-  display: block;
-  text-align: center;
-  font-size: 0.98em;
-  color: #888;
-  margin-top: 8px;
-  margin-bottom: 24px;
-  font-style: italic;
-}
+  .main-content img + em,
+  .main-content img + p > em {
+    display: block;
+    text-align: center;
+    font-size: 0.98em;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    margin-bottom: 24px;
+    font-style: italic;
+    transition: color 0.3s ease;
+  }
 
 /* Ensure sidebar overlays content on mobile */
 .sidebar.open {
   display: block !important;
-  background: #2c3e50;
+  background: var(--bg-sidebar);
 }
 
 /* Hamburger always hidden on desktop */
@@ -511,8 +600,179 @@ video {
   max-height: 500px;
   margin: 24px auto;
   border-radius: 12px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.15), 0 1.5px 6px rgba(80,200,255,0.10);
-  background: #222;
+  box-shadow: 0 4px 24px var(--shadow-color), 0 1.5px 6px rgba(80,200,255,0.10);
+  background: var(--image-bg);
+}
+
+/* Additional dark theme improvements */
+[data-theme="dark"] .main-content {
+  background-color: var(--bg-primary);
+}
+
+[data-theme="dark"] .home-section {
+  background-color: var(--bg-primary);
+}
+
+[data-theme="dark"] .home-section p {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .home-section h1 {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .home-section h2 {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .home-section h3 {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .home-section strong {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .home-section em {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .home-section ul,
+[data-theme="dark"] .home-section ol {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .home-section li {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .home-section blockquote {
+  background-color: var(--bg-secondary);
+  border-left: 4px solid var(--button-bg);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .home-section a {
+  color: var(--text-sidebar-link);
+}
+
+[data-theme="dark"] .home-section a:hover {
+  color: var(--text-sidebar-link-hover);
+}
+
+/* Dark theme coming soon message styling */
+[data-theme="dark"] .coming-soon-container {
+  background-color: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: 0 4px 12px var(--shadow-color) !important;
+}
+
+[data-theme="dark"] .coming-soon-container h2 {
+  color: var(--text-primary) !important;
+}
+
+[data-theme="dark"] .coming-soon-container p {
+  color: var(--text-secondary) !important;
+}
+
+[data-theme="dark"] .coming-soon-container span {
+  background-color: var(--button-bg) !important;
+  color: white !important;
+}
+
+/* Dark theme code block styling */
+[data-theme="dark"] pre {
+  background-color: var(--pre-bg);
+  border: 1px solid var(--border-color);
+  color: #e1e4e8;
+}
+
+[data-theme="dark"] code {
+  background-color: var(--code-inline-bg);
+  color: #e1e4e8;
+}
+
+[data-theme="dark"] pre code {
+  background: none;
+  color: #e1e4e8;
+}
+
+/* Prism.js dark theme override */
+[data-theme="dark"] .token.comment,
+[data-theme="dark"] .token.prolog,
+[data-theme="dark"] .token.doctype,
+[data-theme="dark"] .token.cdata {
+  color: #6a737d;
+}
+
+[data-theme="dark"] .token.punctuation {
+  color: #e1e4e8;
+}
+
+[data-theme="dark"] .token.property,
+[data-theme="dark"] .token.tag,
+[data-theme="dark"] .token.boolean,
+[data-theme="dark"] .token.number,
+[data-theme="dark"] .token.constant,
+[data-theme="dark"] .token.symbol,
+[data-theme="dark"] .token.deleted {
+  color: #79b8ff;
+}
+
+[data-theme="dark"] .token.selector,
+[data-theme="dark"] .token.attr-name,
+[data-theme="dark"] .token.string,
+[data-theme="dark"] .token.char,
+[data-theme="dark"] .token.builtin,
+[data-theme="dark"] .token.inserted {
+  color: #85e89d;
+}
+
+[data-theme="dark"] .token.operator,
+[data-theme="dark"] .token.entity,
+[data-theme="dark"] .token.url,
+[data-theme="dark"] .language-css .token.string,
+[data-theme="dark"] .style .token.string {
+  color: #f97583;
+}
+
+[data-theme="dark"] .token.atrule,
+[data-theme="dark"] .token.attr-value,
+[data-theme="dark"] .token.keyword {
+  color: #f97583;
+}
+
+[data-theme="dark"] .token.function,
+[data-theme="dark"] .token.class-name {
+  color: #b392f0;
+}
+
+[data-theme="dark"] .token.regex,
+[data-theme="dark"] .token.important,
+[data-theme="dark"] .token.variable {
+  color: #ffab70;
+}
+
+/* Override Prism.js default styles for dark theme */
+[data-theme="dark"] .prism {
+  background-color: var(--pre-bg) !important;
+  color: #e1e4e8 !important;
+}
+
+[data-theme="dark"] .prism * {
+  color: inherit !important;
+}
+
+/* Ensure copy button is visible in dark theme */
+[data-theme="dark"] button.copy-btn {
+  background-color: var(--button-bg);
+  color: white;
+  border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] button.copy-btn:hover {
+  background-color: var(--button-hover);
 }
 
 @media (max-width: 768px) {
@@ -524,7 +784,20 @@ video {
     max-height: 220px;
     border-radius: 10px;
     margin: 16px auto;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-    background: #222;
+    box-shadow: 0 2px 12px var(--shadow-color);
+    background: var(--image-bg);
+  }
+  
+  /* Mobile dark theme adjustments */
+  [data-theme="dark"] .header {
+    background-color: var(--bg-header);
+  }
+  
+  [data-theme="dark"] .sidebar {
+    background-color: var(--bg-sidebar);
+  }
+  
+  [data-theme="dark"] .main-content {
+    background-color: var(--bg-primary);
   }
 }

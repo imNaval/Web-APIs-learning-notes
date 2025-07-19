@@ -29,14 +29,14 @@ function updateFilePaths(lang) {
     noteFiles.forEach(note => {
         const topicFile = note.file.split('/').pop();
         note.file = `notes/${lang}/${topicFile}`;
-        console.log(`Updated path for ${note.name}: ${note.file}`);
+        // console.log(`Updated path for ${note.name}: ${note.file}`);
     });
     
     // Update interview question paths to use language subfolder
     interviewFiles.forEach(interview => {
         const topicFile = interview.file.split('/').pop();
         interview.file = `interviewQuestions/${lang}/${topicFile}`;
-        console.log(`Updated path for interview ${interview.name}: ${interview.file}`);
+        // console.log(`Updated path for interview ${interview.name}: ${interview.file}`);
     });
 }
 
@@ -62,7 +62,7 @@ function showComingSoonMessage(container) {
       min-height: calc(100vh - 200px);
       width: 100%;
     ">
-      <div style="
+      <div class="coming-soon-container" style="
         text-align: center;
         padding: 40px;
         background: #f8f9fa;
@@ -90,7 +90,7 @@ async function populateSidebar() {
     
     // Also get the interview list
     const interviewList = document.getElementById('interview-list');
-    console.log('Interview list element:', interviewList);
+    // console.log('Interview list element:', interviewList);
     
     if (interviewList) {
         interviewList.innerHTML = '';
@@ -100,15 +100,15 @@ async function populateSidebar() {
 
     // Get current language
     const currentLang = getCurrentLanguage();
-    console.log(`Current language: ${currentLang}`);
+    // console.log(`Current language: ${currentLang}`);
     const langFolder = currentLang === 'english' ? 'english' : 'hinglish';
-    console.log(`Using language folder: ${langFolder}`);
+    // console.log(`Using language folder: ${langFolder}`);
     updateFilePaths(langFolder);
 
     // Fetch files to ensure they load, but don't overwrite pre-defined subtopics
     await Promise.all(noteFiles.map(async (note) => {
         try {
-            console.log(`Fetching file: ${note.file}`);
+            // console.log(`Fetching file: ${note.file}`);
             const res = await fetch(note.file);
             if (!res.ok) {
                 throw new Error('File not found');
@@ -173,7 +173,7 @@ async function populateSidebar() {
         // Fetch interview question files to find subtopics
         await Promise.all(interviewFiles.map(async (interview) => {
             try {
-                console.log(`Fetching interview file: ${interview.file}`);
+                // console.log(`Fetching interview file: ${interview.file}`);
                 const res = await fetch(interview.file);
                 const content = await res.text();
                 const fetchedSubtopics = [];
@@ -286,13 +286,14 @@ function toggleInterviewSubtopics(interviewId) {
 
 // Initialize sidebar
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM fully loaded and parsed');
+    // console.log('DOM fully loaded and parsed');
+    
     populateSidebar();
 
     // Render home.md in home-note-container if present
     const homeContainer = document.querySelector('.home-note-container');
     if (homeContainer) {
-        console.log('Home container found, loading home.md');
+        // console.log('Home container found, loading home.md');
         fetch('home.md')
             .then(res => res.text())
             .then(md => {
@@ -308,7 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const interviewHeading = document.getElementById('interview');
     const interviewList = document.getElementById('interview-list');
     if (interviewHeading && interviewList) {
-        console.log('Interview section elements found, ensuring visibility');
+        // console.log('Interview section elements found, ensuring visibility');
         interviewHeading.style.display = 'block';
         interviewList.style.display = 'block';
     } else {
@@ -328,6 +329,51 @@ if (header) {
             mainContent.innerHTML = '<p>Error loading homepage. Check console.</p>';
         }
     });
+}
+
+// Theme switching functionality
+function initTheme() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    
+    // Always apply the saved theme to the document
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    
+    if (themeToggleBtn) {
+        updateThemeButton(savedTheme);
+        
+        // Add event listener
+        themeToggleBtn.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeButton(newTheme);
+        });
+    }
+}
+
+// Apply theme immediately on script load (before DOM is ready)
+function applyThemeImmediately() {
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+}
+
+// Apply theme immediately
+applyThemeImmediately();
+
+function updateThemeButton(theme) {
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    if (themeToggleBtn) {
+        if (theme === 'dark') {
+            themeToggleBtn.textContent = '☀️ Light';
+            themeToggleBtn.dataset.theme = 'dark';
+        } else {
+            themeToggleBtn.textContent = '🌙 Dark';
+            themeToggleBtn.dataset.theme = 'light';
+        }
+    }
 }
 
 // Toggle language functionality
